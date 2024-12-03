@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class BeansConfig {
 
     private final UserRepository userRepository;
+
+    @Bean
+    public AuditorAware<String> auditorAware() {
+        return new ApplicationAuditorAware();
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {

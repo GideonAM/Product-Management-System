@@ -14,15 +14,19 @@ import static com.amalitech.product_management_system.user.Permission.*;
 public enum Role {
     ADMIN(
             List.of(ADMIN_DELETE,
-            ADMIN_READ,
-            ADMIN_UPDATE,
-            ADMIN_WRITE)
+                    ADMIN_READ,
+                    ADMIN_UPDATE,
+                    ADMIN_WRITE,
+                    MANAGER_DELETE,
+                    MANAGER_UPDATE,
+                    MANAGER_WRITE,
+                    MANAGE_READ)
     ),
     MANAGER(
             List.of(MANAGER_DELETE,
-            MANAGER_UPDATE,
-            MANAGER_WRITE,
-            MANAGE_READ)
+                    MANAGER_UPDATE,
+                    MANAGER_WRITE,
+                    MANAGE_READ)
     ),
     USER(new ArrayList<>());
 

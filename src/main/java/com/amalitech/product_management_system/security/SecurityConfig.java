@@ -35,7 +35,7 @@ public class SecurityConfig {
                     configuration.setAllowCredentials(true);
                     return configuration;
                 }))
-                .authorizeHttpRequests(requests -> requests.requestMatchers("/api/v1/users")
+                .authorizeHttpRequests(requests -> requests.requestMatchers("/api/v1/users/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()

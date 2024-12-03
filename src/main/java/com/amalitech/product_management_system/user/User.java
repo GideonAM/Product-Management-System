@@ -16,6 +16,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Data
 @Builder
+@Table(name = "_user")
 public class User implements UserDetails, Principal {
 
     @Id
@@ -25,6 +26,7 @@ public class User implements UserDetails, Principal {
     private String email;
     @Column(nullable = false)
     private String password;
+    private boolean isEnabled = false;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -41,7 +43,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return this.isEnabled;
     }
 
     @Override

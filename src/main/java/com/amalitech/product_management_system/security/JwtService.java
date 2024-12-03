@@ -1,9 +1,12 @@
 package com.amalitech.product_management_system.security;
 
+import com.amalitech.product_management_system.user.UserTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +17,10 @@ import java.util.Objects;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
+
+    private final UserTokenRepository userTokenRepository;
 
     @Value("${application.secret_key}")
     private String SECRET_KEY;
@@ -46,7 +52,9 @@ public class JwtService {
     }
 
     public boolean isValidToken(String token) {
-        return false;
+        boolean tokenPresent = userTokenRepository.findByToken(token).isPresent();
+        Date expirationDate = extractClaim(token, Claims::getExpiration);
+        return expirationDate.after(new Date()) && tokenPresent;
     }
 
     private SecretKey secretKey() {

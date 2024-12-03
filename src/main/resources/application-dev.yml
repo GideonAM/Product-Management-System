@@ -6,3 +6,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+application:
+  secret_key: ${SECRET_KEY}

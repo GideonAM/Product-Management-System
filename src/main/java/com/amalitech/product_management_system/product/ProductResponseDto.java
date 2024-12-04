@@ -12,6 +12,7 @@ public record ProductResponseDto(
         Integer quantityInStock,
         String id,
         String productImageUrl,
-        String categoryName
+        String categoryName,
+        Double rating
 ) {
 }

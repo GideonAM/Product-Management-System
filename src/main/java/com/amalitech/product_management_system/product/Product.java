@@ -2,10 +2,9 @@ package com.amalitech.product_management_system.product;
 
 import com.amalitech.product_management_system.category.Category;
 import com.amalitech.product_management_system.common.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.amalitech.product_management_system.review.Review;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -37,7 +37,19 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private String imageUrl;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+    @JsonManagedReference
+    private List<Review> reviews;
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @Transient
+    public Double rating() {
+        return reviews.stream()
+                .mapToDouble(Review::getRating)
+                .average()
+                .orElse(0);
+    }
 }

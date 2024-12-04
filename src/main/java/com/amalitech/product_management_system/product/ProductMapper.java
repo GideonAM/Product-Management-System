@@ -49,6 +49,7 @@ public class ProductMapper {
                 .price(product.getPrice())
                 .quantityInStock(product.getQuantityInStock())
                 .productImageUrl(product.getImageUrl())
+                .rating(product.rating())
                 .categoryName(product.getCategory().getCategoryName())
                 .build();
     }

@@ -9,3 +9,5 @@ spring:
 
 application:
   secret_key: ${SECRET_KEY}
+  file:
+    upload-path: ${FILE_UPLOAD_PATH}

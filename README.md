@@ -14,4 +14,3 @@
 ###  Clone the repository
 ```bash
 git clone https://github.com/GideonAM/Product-Management-System.git
-cd e-commerce-product-management

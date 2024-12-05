@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.lang.String;
 import java.util.List;
 
 @Entity
@@ -26,9 +25,6 @@ public class Order extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @Column(nullable = false)
-    private String paymentMethod;
 
     @OneToMany(mappedBy = "_order")
     @JsonManagedReference

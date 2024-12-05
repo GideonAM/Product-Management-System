@@ -5,15 +5,11 @@ import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import org.springframework.validation.annotation.Validated;
 
-import java.math.BigDecimal;
-
 @Builder
 @Validated
 public record OrderItemDto(
-        @NotBlank(message = "Product id is require")
+        @NotBlank(message = "Product id is required")
         String productId,
-        @Positive(message = "Product price should be above zero")
-        BigDecimal productPrice,
         @Positive(message = "Product quantity should be above zero")
         Integer quantity
 ) {

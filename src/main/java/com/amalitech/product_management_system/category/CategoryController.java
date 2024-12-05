@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,16 +24,19 @@ public class CategoryController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN_WRITE', 'MANAGER_WRITE')")
     public ResponseEntity<String> createCategory(@Valid @RequestBody CategoryDto categoryDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryDto));
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE', 'MANAGER_UPDATE')")
     public ResponseEntity<String> updateCategory(@Valid @RequestBody CategoryDto categoryDto, @PathVariable String id) {
         return ResponseEntity.ok(categoryService.updateCategory(categoryDto, id));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN_DELETE', 'MANAGER_DELETE')")
     public ResponseEntity<String> deleteCategory(@PathVariable String id) {
         return ResponseEntity.ok(categoryService.deleteCategory(id));
     }

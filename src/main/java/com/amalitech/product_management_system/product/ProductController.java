@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN_WRITE', 'MANAGER_WRITE')")
     public ResponseEntity<String> createProduct(@Valid @RequestPart(name = "productDto") ProductDto productDto,
                                                 @RequestParam(name = "productImage") MultipartFile productImage) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productDto, productImage));
@@ -30,11 +32,13 @@ public class ProductController {
     }
 
     @DeleteMapping("/{product-id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN_WRITE', 'MANAGER_WRITE')")
     public ResponseEntity<String> deleteProductById(@PathVariable("product-id") String productId) {
         return ResponseEntity.ok(productService.deleteProductById(productId));
     }
 
     @PutMapping("/{product-id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN_WRITE', 'MANAGER_WRITE')")
     public ResponseEntity<String> updateProduct(
             @PathVariable("product-id") String productId,
             @RequestPart ProductDto productDto,

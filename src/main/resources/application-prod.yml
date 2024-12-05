@@ -11,3 +11,16 @@ application:
   secret_key: ${SECRET_KEY}
   file:
     upload-path: ${FILE_UPLOAD_PATH}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+        health:
+          show-details: never
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      enabled: true

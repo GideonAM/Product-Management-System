@@ -32,13 +32,13 @@ public class ProductController {
     }
 
     @DeleteMapping("/{product-id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN_WRITE', 'MANAGER_WRITE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN_DELETE', 'MANAGER_DELETE')")
     public ResponseEntity<String> deleteProductById(@PathVariable("product-id") String productId) {
         return ResponseEntity.ok(productService.deleteProductById(productId));
     }
 
     @PutMapping("/{product-id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN_WRITE', 'MANAGER_WRITE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE', 'MANAGER_UPDATE')")
     public ResponseEntity<String> updateProduct(
             @PathVariable("product-id") String productId,
             @RequestPart ProductDto productDto,

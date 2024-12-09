@@ -35,7 +35,7 @@ public class Product extends BaseEntity {
     private Integer quantityInStock;
 
     @Column(nullable = false)
-    private String imageUrl;
+    private String imageReference;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     @JsonManagedReference

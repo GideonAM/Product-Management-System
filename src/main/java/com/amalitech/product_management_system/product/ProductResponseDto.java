@@ -11,7 +11,7 @@ public record ProductResponseDto(
         BigDecimal price,
         Integer quantityInStock,
         String id,
-        String productImageUrl,
+        byte[] productImage,
         String categoryName,
         Double rating
 ) {

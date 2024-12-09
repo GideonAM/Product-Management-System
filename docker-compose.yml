@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: pms_mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DOCKER_MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DOCKER_MONGO_PASSWORD}
+
+  mongo-express:
+      image: mongo-express
+      container_name: pms_mongo_express
+      ports:
+        - "8081:8081"
+      environment:
+        - ME_CONFIG_MONGODB_ADMINUSERNAME=${DOCKER_MONGO_USERNAME}
+        - ME_CONFIG_MONGODB_ADMINPASSWORD=${DOCKER_MONGO_PASSWORD}
+        - ME_CONFIG_MONGODB_SERVER=mongodb
+
+volumes:
+  mongo: {}

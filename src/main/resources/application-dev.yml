@@ -6,11 +6,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  data:
+    mongodb:
+      uri: ${MONGO_DB_URI}
 
 application:
   secret_key: ${SECRET_KEY}
-  file:
-    upload-path: ${FILE_UPLOAD_PATH}
 
 management:
   endpoints:

@@ -32,8 +32,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
                     configuration.setAllowedMethods(List.of(GET.name(), POST.name(), PUT.name(), DELETE.name()));
-                    configuration.setAllowedMethods(List.of("*"));
-                    configuration.setAllowCredentials(true);
+                    configuration.setAllowedOrigins(List.of("*"));
                     return configuration;
                 }))
                 .authorizeHttpRequests(requests -> requests.requestMatchers("/api/v1/users/**")

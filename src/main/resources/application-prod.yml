@@ -9,6 +9,7 @@ spring:
   data:
     mongodb:
       uri: ${MONGO_DB_URI}
+      database: ${MONGO_DB_DATABASE}
 
 application:
   secret_key: ${SECRET_KEY}

@@ -44,7 +44,7 @@ public class CategoryService {
 
     public String updateCategory(CategoryDto categoryDto, String id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Product to be updated not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Category to be updated not found"));
 
         category.setCategoryName(categoryDto.categoryName());
         categoryRepository.save(category);
@@ -53,7 +53,7 @@ public class CategoryService {
 
     public String deleteCategory(String id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Product to be deleted not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Category to be deleted not found"));
         categoryRepository.delete(category);
         return "Category deleted";
     }

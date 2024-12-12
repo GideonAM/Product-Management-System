@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ProductImageRepository productImageRepository;
 
     public String createProduct(ProductDto productDto, MultipartFile productImage) {
         Product product = productMapper.toProduct(productDto, productImage);
@@ -41,9 +43,12 @@ public class ProductService {
         );
     }
 
+    @Transactional
     public String deleteProductById(String productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        String imageId = product.getImageReference();
+        productImageRepository.deleteById(imageId);
 
         productRepository.delete(product);
         return "Product deleted successfully";
